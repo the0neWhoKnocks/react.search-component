@@ -1,0 +1,13 @@
+# Logs
+*.log
+npm-debug.log*
+
+# directories
+node_modules
+public/js/vendor
+.idea
+_assets
+
+#files
+*.iml
+public/js/app.js

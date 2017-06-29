@@ -1,0 +1,31 @@
+{
+  "name": "visual-search",
+  "version": "1.0.0",
+  "description": ".",
+  "main": "index.html",
+  "scripts": {
+    "postinstall": "bash ./.bin/npm-postinstall.sh",
+    "start": "webpack-dev-server --progress --colors --content-base ./public --config ./conf.webpack.js",
+    "compile": "webpack --progress --colors --config ./conf.webpack.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Trevor Lemon",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.0.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.4",
+    "style-loader": "^0.18.2",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.1",
+    "webpack": "^2.6.1",
+    "webpack-dev-server": "^2.4.5"
+  },
+  "dependencies": {
+    "prop-types": "^15.5.10",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  }
+}

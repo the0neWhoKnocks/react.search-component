@@ -1,0 +1,60 @@
+.search-bar {
+  position: relative;
+
+  &::before {
+    content: '\1F50D';
+    font-size: 1.3em;
+    line-height: 1.2em;
+    position: absolute;
+    top: 50%;
+    left: 0.5em;
+    transform: translateY(-50%);
+  }
+
+  input {
+    width: 100%;
+    font-size: 1.2rem;
+    padding: 0.5em 4em 0.5em 2em;
+  }
+
+  &__spinner,
+  &__clear-btn {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.25s;
+
+    &.is--visible {
+      opacity: 1;
+    }
+  }
+
+  &__spinner {
+    top: 50%;
+    right: 1em;
+    transform: translateY(-50%);
+  }
+
+  &__clear-btn {
+    height: 100%;
+    color: #aaa;
+    font-weight: bold;
+    padding: 1em;
+    border: none;
+    margin: 0;
+    background: transparent;
+    display: block;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+
+    &::after {
+      content: '\2715';
+      color: #000;
+      font-size: 1.2em;
+      line-height: 0;
+      margin-left: 0.4em;
+      display: inline-block;
+      transform: translateY(0.05em);
+    }
+  }
+}

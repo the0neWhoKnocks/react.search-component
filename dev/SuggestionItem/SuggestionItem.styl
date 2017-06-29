@@ -1,0 +1,47 @@
+$namespace = '.suggestion-item';
+
+{$namespace} {
+  width: 100%;
+  color: #000;
+  text-decoration: none;
+  padding: 0.5em 0.25em;
+  display: table;
+  background-color: transparent;
+  transition: background-color 0.25s;
+
+  &__img,
+  &__copy {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  &__img {
+    width: 100px;
+    height: 130px;
+    border: solid 1px #fff;
+    display: inline-block;
+    background: #eee;
+  }
+
+  &__copy {
+    width: 100%;
+    line-height: 1.5em;
+    padding-left: 1.25em;
+  }
+
+  &__sub-title {
+    color: #888;
+    font-size: 0.8em;
+  }
+
+  &:hover {
+    background-color: #ee;
+
+    {$namespace} {
+
+      &__img {
+        background: #ccc;
+      }
+    }
+  }
+}

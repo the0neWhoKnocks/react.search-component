@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+  <head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1 minimum-scale=1">
+    <style>
+      *, *::before, *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html, body {
+        font: 16px Helvetica,Arial,sans-serif;
+        width: 100%;
+        height: 100%;
+      }
+      body {
+        padding: 0.5em;
+        background-color: #000;
+      }
+
+      @media (min-width: 750px)  {
+        .top-nav {
+          padding: 0.5em;
+          background: #eee;
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+        }
+
+        .search {
+          display: block !important;
+          flex-direction: initial !important;
+          height: initial !important;
+          position: relative;
+        }
+
+        .search-bar {
+          max-width: 16em;
+          float: right;
+        }
+
+        .search-bar input {
+          border-radius: 0.25em;
+          border: solid 1px #666;
+        }
+
+        .visual-search {
+          max-height: 35em;
+          flex-direction: row-reverse !important;
+          clear: both;
+          position: absolute;
+          top: 3em;
+          right: 0;
+        }
+
+        .visual-search__auto-complete-items.has--items {
+          display: flex;
+          flex-direction: column;
+          flex-grow: 0;
+          flex-shrink: 0;
+          flex-basis: 16em;
+        }
+
+        .suggestion-item{
+          width: 50% !important;
+          font-size: 0.9em;
+          display: inline-table !important;;
+        }
+        .suggestion-item__img {
+          width: calc(100px / 1.25);
+          height: calc(130px / 1.25);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="top-nav js-topNav"></nav>
+
+    <script src="js/vendor/react.min.js"></script>
+    <script src="js/vendor/react-dom.min.js"></script>
+    <script src="js/vendor/prop-types.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/page.js"></script>
+  </body>
+</html>
