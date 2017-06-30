@@ -35,16 +35,18 @@
   }
 
   &__clear-btn {
-    height: 100%;
     color: #aaa;
     font-weight: bold;
+    line-height: 0.8em;
     padding: 1em;
     border: none;
+    border-radius: 0.25em;
     margin: 0;
     background: transparent;
     display: block;
-    top: 0;
-    right: 0;
+    top: 0.25em;
+    bottom: 0.25em;
+    right: 0.25em;
     cursor: pointer;
 
     &::after {
@@ -55,6 +57,13 @@
       margin-left: 0.4em;
       display: inline-block;
       transform: translateY(0.05em);
+    }
+
+    &:focus,
+    &:hover {
+      color: #000;
+      outline: none;
+      background-color: rgba(0,0,0,0.1);
     }
   }
 }

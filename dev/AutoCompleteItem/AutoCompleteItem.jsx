@@ -25,57 +25,68 @@ class AutoCompleteItem extends Component {
     });
   }
 
-  toggleState(show){
+  getSuggestions(){
     const _self = this;
 
+    return new Promise(function(resolve, reject){
+      _self.setState({
+        loading: true
+      });
+
+      // make FAKE request
+      const reqTime = Math.floor(Math.random() * 600) + 300;
+      _self.reqTime = setTimeout(function(){
+        const randomAmount = Math.floor(Math.random() * 6) + 1;
+        _self.suggestionData = {
+          title: 'Top Suggestions',
+          suggestionItems: [],
+          viewAll: {
+            count: Math.floor(Math.random() * 60) + 1,
+            text: 'View all',
+            url: '//localhost/pw/2365874'
+          }
+        };
+
+        for(let i=0; i<randomAmount; i++){
+          _self.suggestionData.suggestionItems.push({
+            imgAlt: `Img ${ i+1 } for ${ _self.props.text }`,
+            imgURL: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
+            productSubtitles: [
+              `Product Description ${ i+1 } ${ _self.props.text }`,
+              `${ Math.floor(Math.random() * 15) + 1 } colors`
+            ],
+            productTitle: `Product Title ${ i+1 }`,
+            productURL: `//localhost/p/${ i+1 }`
+          })
+        }
+
+        resolve();
+      }, reqTime);
+    });
+  }
+
+  toggleState(show){
     if( show ){
       // use cached request data if it exists
-      if( _self.suggestionData ){
-        _self.dispatchSuggestions()
+      if( this.suggestionData ){
+        this.dispatchSuggestions();
       }else{
-        // make request
-        _self.setState({
-          loading: true
-        });
-
-        // fake request
-        const reqTime = Math.floor(Math.random() * 600) + 300;
-        _self.reqTime = setTimeout(function(){
-          _self.suggestionData = {
-            title: 'Top Suggestions',
-            suggestionItems: [],
-            viewAll: {
-              count: Math.floor(Math.random() * 60) + 1,
-              text: 'View all',
-              url: '//localhost/pw/2365874'
-            }
-          };
-          const randomAmount = Math.floor(Math.random() * 6) + 1;
-
-          for(let i=0; i<randomAmount; i++){
-            _self.suggestionData.suggestionItems.push({
-              imgAlt: `Img ${ i+1 } for ${ _self.props.text }`,
-              imgURL: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
-              productSubtitles: [
-                `Product Description ${ i+1 } ${ _self.props.text }`,
-                `${ Math.floor(Math.random() * 15) + 1 } colors`
-              ],
-              productTitle: `Product Title ${ i+1 }`,
-              productURL: `//localhost/p/${ i+1 }`
-            })
-          }
-
-          _self.setState({
+        this.getSuggestions()
+        .then(function(){
+          this.setState({
             loading: false
           });
-          _self.dispatchSuggestions()
-        }, reqTime);
+          this.dispatchSuggestions();
+        }.bind(this))
+        .catch(function(err){
+          console.error(err);
+        });
       }
     }else{
-      // kill the fake request if a user has selected something else
+      // kill the FAKE request if this item was blurred
       clearInterval(this.reqTime);
 
-      _self.setState({
+      this.setState({
         loading: false
       });
 

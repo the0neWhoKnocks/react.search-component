@@ -36,6 +36,7 @@ var conf = {
           appConfig.paths.SOURCE_JS
         ],
         query: {
+          plugins: ['es6-promise'],
           presets: ['es2015', 'react']
         }
       }

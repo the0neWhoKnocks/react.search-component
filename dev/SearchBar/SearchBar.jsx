@@ -22,6 +22,42 @@ class SearchBar extends Component {
     };
   }
 
+  getAutoCompleteItems(){
+    const _self = this;
+    const reqTime = Math.floor(Math.random() * 1500) + 1;
+
+    console.log('Get auto-complete values');
+    this.setState({
+      status: this.statuses.PROCESSING
+    });
+
+    this.searchReq = setTimeout(function(){
+      const maxResults = 4;
+      const randomAmount = Math.floor(Math.random() * maxResults) + 1;
+      const val = 'FAKE VAL';
+      let fakeVals = [];
+
+      for(let i=0; i<randomAmount; i++){
+        const randomInsertionPnt = Math.floor(Math.random() * val.length);
+        const result = val.substr(0, randomInsertionPnt) + _self.state.value + val.substr(randomInsertionPnt, val.length);
+
+        fakeVals.push({
+          query: _self.state.value,
+          text: result,
+          url: `http://fake.com/${ i }`
+        });
+      }
+
+      _self.setState({
+        status: _self.statuses.SUCCESS
+      });
+
+      _self.props.onResults({
+        results: fakeVals
+      });
+    }, reqTime);
+  }
+
   handleInput(ev){
     const _self = this;
     const el = ev.currentTarget;
@@ -37,49 +73,20 @@ class SearchBar extends Component {
 
     this.props.onInput(queryVal);
 
+    // only ping the server when the user has stopped typing
     clearTimeout( this.inputDebounce );
     this.inputDebounce = setTimeout(function(){
-      // actual request > here <
-
-      // everything except the `dispatch` can be deleted
+      // if already making a request, cancel it
       if( _self.searchReq ){
         console.log('Cancel fake request');
+        // if using `XMLHttpRequest` - xhr.abort();
+
+        // MOCKED request
         clearTimeout( _self.searchReq );
       }
 
       if( queryVal !== '' ){
-        console.log('Making fake request');
-        const reqTime = Math.floor(Math.random() * 1500) + 1;
-
-        _self.setState({
-          status: _self.statuses.PROCESSING
-        });
-
-        _self.searchReq = setTimeout(function(){
-          const maxResults = 4;
-          const randomAmount = Math.floor(Math.random() * maxResults) + 1;
-          const val = 'FAKE VAL';
-          let fakeVals = [];
-
-          for(let i=0; i<randomAmount; i++){
-            const randomInsertionPnt = Math.floor(Math.random() * val.length);
-            const result = val.substr(0, randomInsertionPnt) + queryVal + val.substr(randomInsertionPnt, val.length);
-
-            fakeVals.push({
-              query: queryVal,
-              text: result,
-              url: `http://fake.com/${ i }`
-            });
-          }
-
-          _self.setState({
-            status: _self.statuses.SUCCESS
-          });
-
-          _self.props.onResults({
-            results: fakeVals
-          });
-        }, reqTime);
+        _self.getAutoCompleteItems();
       }else{
         _self.handleClear();
       }
