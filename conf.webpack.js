@@ -16,7 +16,7 @@ var conf = {
     library: ['lib', '[name]'], // expose exported item to window
     libraryTarget: 'umd',
     path: appConfig.paths.PUBLIC_JS,
-    publicPath: '/public/js',
+    publicPath: '/js/',
     umdNamedDefine: true
   },
   module: {
